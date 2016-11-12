@@ -140,7 +140,7 @@ func (h *Histogram) Close() {
 		}
 	}
 
-	scale := maxY / 75
+	scale := maxY / 50
 	fmt.Printf("∎:\t%d\n", scale)
 	for i := 0; i < len(labels); i++ {
 		fmt.Printf(labels[i])
