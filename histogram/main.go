@@ -101,15 +101,16 @@ func (h *Histogram) Close() {
 	h.stopInput <- true
 	<- h.inputComplete
 
+	sort.Sort(h.data)
 	fmt.Printf("count:\t%0.f\n", h.count)
 	fmt.Printf("mean:\t%f\n", h.mean)
+	fmt.Printf("median:\t%f\n", h.data[int(h.count) / 2])
 	fmt.Printf("max:\t%f\n", h.max)
 	fmt.Printf("min:\t%f\n", h.min)
 	fmt.Printf("ss:\t%f\n", h.ss)
 	fmt.Printf("var:\t%f\n", h.ss / h.count)
 	fmt.Printf("sd:\t%f\n", math.Sqrt(h.ss / h.count))
 
-	sort.Sort(h.data)
 	bins := float64(10)
 	w := (h.max - h.min) / bins
 	idx := 0
